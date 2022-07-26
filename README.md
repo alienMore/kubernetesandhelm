@@ -48,9 +48,13 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
 
-4)
-on master node
-a) yum install kubeadm
+on master node and workerS
+a) yum install kubeadm kubectl kubelet kubernetes-cni
+kubectl-1.21.0-0.x86_64
+kubelet-1.21.0-0.x86_64
+kubeadm-1.21.0-0.x86_64
+kubernetes-cni-0.8.7-0.x86_64
+
 Dependencies resolved.
 =============================
  Package
