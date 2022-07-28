@@ -611,3 +611,30 @@ kubernetes                 ClusterIP   10.96.0.1      <none>        443/TCP     
 
 http://192.168.206.133:30001/
 ```
+###  kubernetes offline install
+```bash
+kubeadm config images list
+I0727 21:46:22.478440  433505 version.go:254] remote version is much newer: v1.24.3; falling back to: stable-1.21
+k8s.gcr.io/kube-apiserver:v1.21.14
+k8s.gcr.io/kube-controller-manager:v1.21.14
+k8s.gcr.io/kube-scheduler:v1.21.14
+k8s.gcr.io/kube-proxy:v1.21.14
+k8s.gcr.io/pause:3.4.1
+k8s.gcr.io/etcd:3.4.13-0
+k8s.gcr.io/coredns/coredns:v1.8.0
+
+For each image that appears in the list that was returned in the preceding step, execute the following commands to pull the image and save it as a TAR archive:
+
+docker pull k8s.gcr.io/<image name>
+docker save k8s.gcr.io/<image name> > <image name>.tar
+where <image name> is the name of the image to pull, for example:
+
+docker pull k8s.gcr.io/kube-apiserver:v1.21.2
+docker save k8s.gcr.io/kube-apiserver:v1.21.2 > kube-apiserver_v1.21.2.tar
+```
+### Load Kubernetes Images (offline machine)
+```#!/usr/bin/env bash
+docker load < <image name>.tar
+where <image name> is the name of the image to unpack, for example:
+docker load < kube-apiserver_v1.21.2.tar
+```
